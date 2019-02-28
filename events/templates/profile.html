@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}profile{% endblock title %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="card_detail">
+            <div class="card-header">
+                <h4>{{ request.user }}'s Profile <a href="{% url 'update-profile'%}" class=" text-light float-right"><i class="fas fa-edit"></i></a></h4>
+
+            </div>
+            <div class="card-body ">
+                <div class="col-md-5 col-xs-12 col-sm-6 col-lg-3">
+                    <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="rounded-circle img-fluid rounded float-left">
+                </div <div class="col-md-8 col-xs-12 col-sm-6 col-lg-5">
+                <div class="container text-dark">
+                    <h2>UserName: {{request.user.username}}</h2>
+                    <p><b>First Name: {{request.user.first_name}}</b></p>
+                </div>
+                <hr>
+                <ul class="container details text-dark">
+                    <li>
+                        <p><span class="glyphicon glyphicon-user one" style="width:50px;"></span>Last Name: {{request.user.last_name}}</p>
+                    </li>
+                    <li>
+                        <p><span class="glyphicon glyphicon-envelope one" style="width:50px;"></span> Email: {{request.user.email}}</p>
+                    </li>
+                </ul>
+                <hr>
+                <div class="col-md-8 col-xs-12 col-sm-6 col-lg-6 tital text-dark">Date Of Joining: 15 Jun 2016</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

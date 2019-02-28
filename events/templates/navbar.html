@@ -1,27 +1,22 @@
-<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-  <div class="container">
-    <a class="navbar-brand" href="#">Django Event Planner</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav ml-auto">
-        {% if request.user.is_anonymous %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+<i class="fas fa-bars"></i>
+<nav id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+        <li class="sidebar-brand mt-6">
+            <a class="js-scroll-trigger" href="#page-top"><i class="fas fa-spinner "></i> Evento Planner</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'login' %}">Log In</a>
+        <li class="sidebar-nav-item">
+            <a class="js-scroll-trigger" href="{%url 'home' %}"><i class="fas fa-home"></i> Home</a>
         </li>
-        {% else %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+        <li class="sidebar-nav-item">
+            <a class="js-scroll-trigger" href="{% url 'event-list'%}"><i class="fas fa-clipboard-list"></i> Events List</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">{{ request.user }}</a>
+        {% if not request.user.is_anonymous %}
+        <li class="sidebar-nav-item">
+            <a class="js-scroll-trigger" href="{% url 'profile'%}"><i class="far fa-user-circle"></i> Profile</a>
         </li>
-        {% endif %}
-      </ul>
-    </div>
-  </div>
+        <li class="sidebar-nav-item">
+            <a class="js-scroll-trigger" href="{% url 'dashboard'%}"><i class="fas fa-project-diagram"></i> Dashborad</a>
+        </li>
+        {%endif%}
+    </ul>
 </nav>

@@ -37,13 +37,33 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'location_field.apps.DefaultConfig',
 
     'events',
 
     'crispy_forms',
+    'rest_framework',
+    'api'
 ]
+# Email settings
+ 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_PASSWORD = 'Sitah@999'
+EMAIL_HOST_USER = 'sitahlatif@gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+ADMINS = [    
+    ('sitahlatif', 'sitahlatif@gmail.com'),
+
+]
+MANAGERS = [    
+    ('sitahlatif', 'sitahlatif@gmail.com'),
+   
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -53,6 +73,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.common.BrokenLinkEmailsMiddleware',
 ]
 
 ROOT_URLCONF = 'event_planner.urls'

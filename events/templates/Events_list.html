@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}List{% endblock title %}
+{% block content %}
+<div class="masthead_list">
+    <div class="container">
+        <div class="input-group-lg ">
+            <form action="{% url 'event-list' %}">
+                <div class="input-group-append mr-5">
+                    <input type="text" class="form-control" placeholder="Search by Name | location | Organizer" name="q" value="{{request.GET.q}}" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <button class="btn login" type="submit" id="basic-addon2">Search</span></button>
+                </div>
+            </form>
+        </div>
+        {% for event in events %}
+        <div class="card_list ">
+            {% if event.seats_left == 0%}
+            <div class="alert alert-danger" role="alert">
+                <p class="card-text text-danger sold">Sold Out</p>
+            </div>
+            {% else %}
+            <div class="alert alert-success" role="alert">
+                <p class="card-text text-success">Avaliable</p>
+            </div>
+            {%endif%}
+            <p class="card-tex text-white mb-0"><i class="fas fa-calendar-day"></i> {{ event.datetime|timeuntil }}</p>
+            <p class="bg-warning pt-1 mt-0"> <i class="fas fa-map-marker-alt"></i> {{event.location}}</p>
+            <div class="card-content white-text">
+                <div class="card-header-list ">
+                    <img src="{{ event.pretty_picture.url}}" alt="Denim Jeans" style="width:100%">
+                </div>
+                <div class="card-body text-dark">
+                    <h5 class="card-title">{{event.title}}</h5>
+                    <!-- <p class="card-text">{{event.description}}</p>-->
+                    <p>{{ event.datetime }}</p>
+                    <a href="{{event.get_absolute_url}}" class="btn button">More Info</a>
+                </div>
+            </div>
+        </div>
+        {%endfor%}
+    </div>
+    {% endblock content %}

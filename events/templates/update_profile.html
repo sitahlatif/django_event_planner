@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+    <form action="{% url 'update-profile' %}" method="POST">
+        {% csrf_token %}
+        {{form|crispy}}
+        <input type="submit" value="Update" class="btn" style="background-color: #e3f2fd; color: white;">
+    </form>
+</div>
+{% endblock content %}

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}List{% endblock title %}
+{% block content %}
+<div class="navbar-expand-md bg-warning text-center welcome text-white">
+    <h3> Welcome to your dashboard {{request.user}} </h3>
+</div>
+<div class="masthead-dash"></div>
+<div class="container mt-5">
+    <h4><i class="fab fa-creative-commons-by welcome"></i> Event I Organized: </h4>
+    <a href="{% url 'create-event' %}" class=" btn btn-light  btn-block bg-warning mb-4"><i class="far fa-plus-square "></i> Create New Event</a>
+    <table class="table table-hover table-dark">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">LOcation</th>
+                <th scope="col">DateTime</th>
+                <th scope="col">Seats</th>
+            </tr>
+        </thead>
+        {% for e in event %}
+        <tbody>
+            <tr class="table-info text-dark">
+                <td>{{e.title}}</td>
+                <td>{{e.description}}</td>
+                <td>{{e.location}}</td>
+                <td>{{e.datetime}}</td>
+                <td>{{e.seats}}</td>
+                <td><a href="{% url 'update-event' e.id %}" class="btn btn-light bg-warning"><i class="far fa-edit"></i></a></td>
+                <td><a href="{% url 'delete-event' e.id %}" class="btn btn-light bg-danger"><i class="far fa-calendar-times"></i></a></td>
+            </tr>
+        </tbody>
+        {%endfor%}
+    </table>
+    <br>
+    <h4><i class="fas fa-bookmark"></i> Event I will Attend: </h4>
+    <table class="table table-hover table-dark" style="color: #000034">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">LOcation</th>
+                <th scope="col">DateTime</th>
+                <th scope="col">Tickets</th>
+            </tr>
+        </thead>
+        {% for b in book%}
+        <tbody>
+            <tr class="table-info">
+                <td>{{b.event.title}}</td>
+                <td>{{b.event.location}}</td>
+                <td>{{b.event.datetime}}</td>
+                <td>{{b.seats}}</td>
+            </tr>
+        </tbody>
+        {%endfor%}
+    </table>
+</div>
+{% endblock content %}

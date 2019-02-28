@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container">
+    <form action="{% url 'create-event' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div id="div_id_title" class="form-group">
+            <label for="id_title" class="col-form-label  requiredField">
+                Title<span class="asteriskField">*</span> </label>
+            <div class="">
+                <input type="text" name="title" maxlength="20" class="textinput textInput form-control" required="" id="id_title">
+            </div>
+        </div>
+        <div id="div_id_description" class="form-group">
+            <label for="id_description" class="col-form-label  requiredField">
+                Description<span class="asteriskField">*</span>
+            </label>
+            <div class="">
+                <textarea name="description" cols="40" rows="10" class="textarea form-control" required="" id="id_description"></textarea></div>
+        </div>
+        <div id="div_id_location" class="form-group"> <label for="id_location" class="col-form-label  requiredField">
+                Location<span class="asteriskField">*</span> </label>
+            <div class="">
+                <input type="text" name="location" maxlength="40" class="textinput textInput form-control" required="" id="id_location">
+            </div>
+        </div>
+        <div id="div_id_datetime" class="form-group">
+            <label for="id_datetime" class="col-form-label  requiredField">
+                Datetime<span class="asteriskField">*</span> </label>
+            <div class="">
+                <input type="text" name="datetime" value="2012-09-04 06:00" class="datetimeinput form-control" required="" id="id_datetime"> </div>
+        </div>
+        <div id="div_id_seats" class="form-group"> <label for="id_seats" class="col-form-label  requiredField">
+                Seats<span class="asteriskField">*</span> </label>
+            <div class="">
+                <input type="number" name="seats" value="1" min="0" class="numberinput form-control" required="" id="id_seats"> </div>
+        </div>
+        <div id="div_id_pretty_picture" class="form-group"> <label for="id_pretty_picture" class="col-form-label ">
+                Pretty picture
+            </label> <div class=""> <input type="file" name="pretty_picture" accept="image/*" class="clearablefileinput" id="id_pretty_picture"> </div> </div>
+        <input
+         type="submit" value="Create Event" class="btn" style="background-color: #e3f2fd; color: black;">
+    </form>
+</div>
+{% endblock content %}

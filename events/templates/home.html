@@ -1,24 +1,42 @@
 {% extends "base.html" %}
-
 {% block content %}
-<header class="masthead text-center text-white">
-  <div class="masthead-content">
-    <div class="container">
-      <h1 class="masthead-heading mb-0">All the events,</h1>
-      <h2 class="masthead-subheading mb-0">You could ever want...</h2>
-      {% if request.user.is_anonymous %}
-        <a href="{% url 'signup' %}" class="btn btn-primary btn-xl rounded-pill mt-5">Sign up to find events!</a>
-      {% else %}
-        <a href="#" class="btn btn-primary btn-xl rounded-pill mt-5">Find events!</a>
-      {% endif %}
+<!-- Header -->
+<header class="masthead d-flex">
+    <div class="container text-center my-auto">
+
+        <h1 class="mb-1"><i class="fas fa-spinner "></i> Evento Planner</h1>
+        <br>
+        <h2 class="mb-5">
+            <strong>Events Comming Soon!</strong>
+        </h2>
+        <br>
+        <a class="  btn-xl js-scroll-trigger" href="#about"><i class="far fa-play-circle fa-4x text-primary fa-light"></i></a>
     </div>
-  </div>
-  <div class="bg-circle-1 bg-circle"></div>
-  <div class="bg-circle-2 bg-circle"></div>
-  <div class="bg-circle-3 bg-circle"></div>
-  <div class="bg-circle-4 bg-circle"></div>
+    <div class="overlay"></div>
 </header>
-
-
-
+<!-- About -->
+<section class="content-section bg-light" id="about">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-lg-12 mx-auto">
+                {%for event in event%}
+                <div class="card" v-for="(card, index) in cards" :key="index" :ref="`card_${index}`" @mouseover="hoverCard(index)" @mouseout="hoverCard(-1)" class="card text-center">
+                    <img src="{{ event.pretty_picture.url}}" alt="Denim Jeans" style="width:100%">
+                    <h1>{{event.title}}</h1>
+                    <p class="price"> <i class="fas fa-map-marker-alt"></i>{{event.location}}</p>
+                    <p>{{event.datetime}}</p>
+                    <a href="{% url 'event-detail' event.id %}" class="btn-block button">{{event.datetime|timeuntil}}</a>
+                </div>
+                {%endfor%}
+                <br>
+                <br>
+                <a class="btn btn-primary btn-xl js-scroll-trigger" href="{% url 'event-list'%}"><i class="fas fa-list-alt"></i> Find Out More</a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
 {% endblock %}

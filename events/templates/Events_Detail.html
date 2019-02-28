@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}List{% endblock title %}
+{% block content %}
+<div class="container">
+    <div class="card_detail text-dark">
+        <div class="card-header text-center text-white bg-warning"> <i class="fas fa-map-marker-alt"></i> {{event.location}}
+            {%if request.user == event.owner%}
+            <a href="{% url 'update-event' event.id%}" class="btn float-right"><i class="fas fa-edit"></i></a>
+            {%endif%}
+        </div>
+        <div class="card-header text-center text-white">
+            {{event.datetime}}
+        </div>
+        <div class="card-body text-center">
+            <strong></strong>
+            <h1 class="card-title mb-1 text-dark">{{event.title}}</h1></strong>
+            <img src="{{ event.pretty_picture.url}}" alt="Denim Jeans" style="width:100%">
+            <h3 class="card-text text-left"><i class="fas fa-pen"></i> Description: <span class="text-dark description">{{event.description}}</span></h3>
+            <h3 class="card-text text-left"><i class="fas fa-ticket-alt"></i> Capacity:<span class="navbar-brand text-dark">{{event.seats}}</span></h3>
+            {% if event.seats_left == 0%}
+            <div class="alert alert-danger" role="alert">
+                <p class="card-text text-danger">Sorry NO Avaliable seat</p>
+            </div>
+            {% else %}
+            <h3 class="card-text text-left"><i class="fas fa-clipboard-check"></i> Avaliable seat:<span class="navbar-brand text-dark">{{event.seats_left}}</span></h3>
+        </div>
+        <form action="{% url 'event-detail' event.id %}" method="POST">
+            {% csrf_token %}
+            <input type="number" name="seats" min="1" class="numberinput form-control" required="" id="id_seats" placeholder="Number of Tickets">
+            <input type="submit" class="btn button btn-block " value="Book Now">
+        </form>
+        {% endif %}
+    </div>
+    <br>
+    <br>
+    {%if request.user == event.owner%}
+    <h3> <i class="fas fa-users"></i> who booked this event: </h3>
+    <table class="table table-hover table-dark " style="color: #000034">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Tickets</th>
+            </tr>
+        </thead>
+        {% for b in book%}
+        <tbody style="background-color: #e3f2fd">
+            <tr class="table-info">
+                <td>{{b.user}}</td>
+                <td>{{b.seats}}</td>
+            </tr>
+        </tbody>
+        {%endfor%}
+    </table>
+    {%endif%}
+</div>
+{% endblock content %}
